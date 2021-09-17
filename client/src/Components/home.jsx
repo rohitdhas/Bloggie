@@ -13,30 +13,9 @@ export default function Home() {
       });
   }, []);
 
-  function logout() {
-    fetch("http://localhost:8080/logout", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ success }) => {
-        if (success) {
-          setData({});
-        }
-      });
-  }
-
   return (
     <div>
-      {!data ? (
-        <h1>
-          <a href="/login">Click Here</a> to Login!
-        </h1>
-      ) : (
-        <>
-          <h1>Hello, {data.name}</h1>
-          <button onClick={logout}>Logout</button>
-        </>
-      )}
+      <h1>Feed</h1>
     </div>
   );
 }

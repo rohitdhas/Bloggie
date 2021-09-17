@@ -43,7 +43,7 @@ export const RegisterForm = styled.div`
       cursor: pointer;
       border: none;
       color: white;
-      background-color: #2bb0ee;
+      background-color: #0d98d8;
       font-weight: bold;
       i {
         margin-right: 5px;
@@ -51,7 +51,7 @@ export const RegisterForm = styled.div`
       }
 
       &:hover {
-        background-color: #209dd6;
+        background-color: #47afdf;
       }
     }
 

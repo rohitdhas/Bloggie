@@ -20,7 +20,7 @@ export default function Register() {
       .then((res) => res.json())
       .then(({ success }) => {
         if (success) {
-          history.push("/login");
+          window.location = "/";
         }
       });
   }, []);
@@ -53,7 +53,7 @@ export default function Register() {
       .then((res) => res.json())
       .then(({ message, success }) => {
         if (success) {
-          history.push("/");
+          window.location = "/";
         } else {
           messageRef.current.innerHTML = message;
           messageRef.current.classList.add("active");
@@ -118,7 +118,7 @@ export default function Register() {
           </div>
           <button type="submit">Create Account</button>
           <p>
-            <a href="/login">Create Here</a> to Login
+            <a href="/login">Click Here</a> to Login
           </p>
         </form>
       </RegisterForm>

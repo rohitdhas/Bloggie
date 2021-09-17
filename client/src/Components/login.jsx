@@ -1,13 +1,11 @@
 import icon from "../Media/blog_icon.png";
 import { Page, LeftSection, LoginForm } from "../Styles/loginPageStyles";
 import { useRef, useEffect } from "react";
-import { useHistory } from "react-router";
 
 export default function Login() {
   const usernameRef = useRef("");
   const passwordRef = useRef("");
   const messageRef = useRef(null);
-  const history = useHistory();
 
   useEffect(() => {
     fetch("http://localhost:8080/getUser", {
@@ -16,7 +14,7 @@ export default function Login() {
       .then((res) => res.json())
       .then(({ success }) => {
         if (success) {
-          history.push("/");
+          window.location = "/";
         }
       });
   }, []);
@@ -46,7 +44,7 @@ export default function Login() {
       .then((res) => res.json())
       .then(({ message, success }) => {
         if (success) {
-          history.push("/");
+          window.location = "/";
         } else {
           messageRef.current.innerHTML = message;
           messageRef.current.classList.add("active");

@@ -107,7 +107,7 @@ export const LoginForm = styled.div`
       cursor: pointer;
       border: none;
       color: white;
-      background-color: #2bb0ee;
+      background-color: #0d98d8;
       font-weight: bold;
       i {
         margin-right: 5px;
@@ -115,7 +115,7 @@ export const LoginForm = styled.div`
       }
 
       &:hover {
-        background-color: #209dd6;
+        background-color: #47afdf;
       }
     }
 
