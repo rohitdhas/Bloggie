@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const User = require('./userSchema');
 
 const Blog = new Schema({
     title: {
+        type: String,
+        required: true
+    },
+    snippit: {
         type: String,
         required: true
     },
@@ -12,12 +15,11 @@ const Blog = new Schema({
         required: true
     },
     datePosted: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: new Date().toLocaleString()
     },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: User,
+    writtenBy: {
+        type: String,
         required: true
     },
     likes: {

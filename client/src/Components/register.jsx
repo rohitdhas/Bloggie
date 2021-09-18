@@ -2,7 +2,8 @@ import { useRef, useEffect } from "react";
 import icon from "../Media/blog_icon.png";
 import { LeftSection, Page } from "../Styles/loginPageStyles";
 import { RegisterForm } from "../Styles/registerPageStyles";
-import { useHistory } from "react-router";
+import { checkAuthenticated } from "../Helper/userAuth";
+import { startLoader, stopLoader } from "./loader";
 
 export default function Register() {
   const messageRef = useRef("");
@@ -11,18 +12,9 @@ export default function Register() {
   const passwordRef = useRef("");
   const emailRef = useRef("");
   const retypePasswordRef = useRef("");
-  const history = useHistory();
 
   useEffect(() => {
-    fetch("http://localhost:8080/getUser", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ success }) => {
-        if (success) {
-          window.location = "/";
-        }
-      });
+    checkAuthenticated();
   }, []);
 
   function createAccount(e) {
@@ -37,6 +29,7 @@ export default function Register() {
       return;
     }
 
+    startLoader();
     fetch("http://localhost:8080/register", {
       method: "POST",
       headers: {
@@ -52,12 +45,12 @@ export default function Register() {
     })
       .then((res) => res.json())
       .then(({ message, success }) => {
+        stopLoader();
         if (success) {
-          window.location = "/";
-        } else {
-          messageRef.current.innerHTML = message;
-          messageRef.current.classList.add("active");
+          window.location = "/login";
         }
+        messageRef.current.innerHTML = message;
+        messageRef.current.classList.add("active");
       });
   }
 

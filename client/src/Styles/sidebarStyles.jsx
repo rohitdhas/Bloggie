@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Bar = styled.ul`
   background-color: #0fe456;
   padding: 10px 0;
-  width: 180px;
+  width: 200px;
   margin: 0;
   position: fixed;
   top: 0;

@@ -2,7 +2,7 @@ import { Bar } from "../Styles/sidebarStyles";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Media/blog_icon.png";
-import { logout } from "../Helper/userAuth";
+import { logout, getAndSetUserData } from "../Helper/userAuth";
 import { toggleSearchBar } from "./searchBar";
 import toggleListItem from "../Helper/sidebarHandler";
 
@@ -12,14 +12,8 @@ export default function SideBar() {
   const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:8080/getUser", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ data }) => {
-        if (!data) return;
-        else setUserData(data);
-      });
+    toggleListItem();
+    getAndSetUserData(setUserData);
   }, [location.pathname]);
 
   if (!unwantedPaths.includes(location.pathname)) {
@@ -39,7 +33,7 @@ export default function SideBar() {
           </Link>
         ) : (
           <Link to={`/profile/${userData.username}`}>
-            <li onClick={(e) => toggleListItem(e)} className="profile_options">
+            <li className="profile_options profile">
               <img
                 src={userData.profileImage}
                 alt="profilePic"
@@ -56,25 +50,25 @@ export default function SideBar() {
           </li>
         </Link>
         <Link to="/">
-          <li className="active" onClick={(e) => toggleListItem(e)}>
+          <li className="feed">
             <i className="fas fa-file-alt"></i>
             <span>My Feed</span>
           </li>
         </Link>
-        <Link to="#">
-          <li>
+        <Link to="/editor">
+          <li className="editor">
             <i className="fas fa-pen"></i>
             <span>New Blog</span>
           </li>
         </Link>
         <Link to="/drafts">
-          <li onClick={(e) => toggleListItem(e)}>
+          <li className="drafts">
             <i className="fas fa-pencil-ruler"></i>
             <span>Drafts</span>
           </li>
         </Link>
         <Link to="/bookmarks">
-          <li onClick={(e) => toggleListItem(e)}>
+          <li className="bookmarks">
             <i className="far fa-bookmark"></i>
             <span>Bookmarks</span>
           </li>

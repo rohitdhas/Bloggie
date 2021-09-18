@@ -23,16 +23,16 @@ const register = (req, res) => {
     else {
         const { name, email, username, password } = req.body;
         try {
-            User.findOne({ username }, async (err, doc) => {
+            User.findOne({ $or: [{ username }, { email }] }, async (err, doc) => {
                 if (err) {
                     res.status(500).send({ message: "Something Went Wrong!", success: false });
                 };
-                if (doc) res.send({ message: "Username already exist!", success: false });
+                if (doc) res.send({ message: "Username or Email already exist!", success: false });
                 else {
                     const hashedPassword = await bcrypt.hash(password, 10);
                     const newUser = User({
                         name,
-                        email: email || '',
+                        email,
                         username,
                         password: hashedPassword,
                     });

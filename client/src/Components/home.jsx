@@ -1,21 +1,40 @@
 import { useState, useEffect } from "react";
+import { Page, BlogPost } from "../Styles/homeStyles";
+
+export const testBlog = {
+  title: "My First Blog on Bloggie",
+  datePosted: "18-09-21",
+  createdBy: "rohit",
+  markdown:
+    "Say, Hello to the revolutionary blogging platform ever created in the human history. Bloggie is the best bloggin platform in the world out there.",
+};
 
 export default function Home() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    fetch("http://localhost:8080/getUser", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ data }) => {
-        setData(data);
-      });
-  }, []);
+  const [blogs, setBlogs] = useState([testBlog]);
 
   return (
-    <div>
-      <h1>Feed</h1>
-    </div>
+    <Page>
+      <h1>Your Feed</h1>
+      {!blogs.length ? (
+        <h1>Nothing to Show Here!</h1>
+      ) : (
+        blogs.map((blog) => {
+          return (
+            <BlogPost>
+              <div className="blog_title">
+                <a href="#">{blog.title}</a>
+              </div>
+              <span>
+                By <a href={`/profile/${blog.createdBy}`}>{blog.createdBy}</a>
+              </span>
+              <p className="snippit">
+                Posted on {blog.datePosted} - {blog.markdown}...{" "}
+                <a href="#">Read more</a>{" "}
+              </p>
+            </BlogPost>
+          );
+        })
+      )}
+    </Page>
   );
 }

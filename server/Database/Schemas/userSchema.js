@@ -11,10 +11,11 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        required: true
     },
     profileImage: {
         type: String,
-        default: 'https://comnplayscience.eu/app/images/notfound.png'
+        default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5zcz95G9y-0CjNqLvB8fP-UKzjZqzVeEGOe9EUBuIdJqnGT5u8_aKiyNhIiM4zWj4VQc&usqp=CAU'
     },
     password: {
         type: String,

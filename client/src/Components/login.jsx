@@ -1,6 +1,8 @@
 import icon from "../Media/blog_icon.png";
 import { Page, LeftSection, LoginForm } from "../Styles/loginPageStyles";
 import { useRef, useEffect } from "react";
+import { checkAuthenticated } from "../Helper/userAuth";
+import { startLoader, stopLoader } from "./loader";
 
 export default function Login() {
   const usernameRef = useRef("");
@@ -8,15 +10,7 @@ export default function Login() {
   const messageRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/getUser", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ success }) => {
-        if (success) {
-          window.location = "/";
-        }
-      });
+    checkAuthenticated();
   }, []);
 
   function LocalLogin(e) {
@@ -30,6 +24,7 @@ export default function Login() {
       return;
     }
 
+    startLoader();
     fetch("http://localhost:8080/login/local", {
       method: "POST",
       headers: {
@@ -43,6 +38,7 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then(({ message, success }) => {
+        stopLoader();
         if (success) {
           window.location = "/";
         } else {
