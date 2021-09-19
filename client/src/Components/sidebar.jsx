@@ -2,9 +2,10 @@ import { Bar } from "../Styles/sidebarStyles";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Media/blog_icon.png";
-import { logout, getAndSetUserData } from "../Helper/userAuth";
-import { toggleSearchBar } from "./searchBar";
+import { logout } from "../Helper/userAuth";
 import toggleListItem from "../Helper/sidebarHandler";
+import { getAndSet } from "../Helper/blogHandler";
+import { addActiveClass } from "../Helper/toggler";
 
 export default function SideBar() {
   const [userData, setUserData] = useState({});
@@ -13,7 +14,7 @@ export default function SideBar() {
 
   useEffect(() => {
     toggleListItem();
-    getAndSetUserData(setUserData);
+    getAndSet("userdata", setUserData);
   }, [location.pathname]);
 
   if (!unwantedPaths.includes(location.pathname)) {
@@ -44,7 +45,9 @@ export default function SideBar() {
           </Link>
         )}
         <Link to="#">
-          <li onClick={toggleSearchBar}>
+          <li
+            onClick={() => addActiveClass(["searchbar_overlay", "searchbar"])}
+          >
             <i className="fas fa-search"></i>
             <span>Search</span>
           </li>

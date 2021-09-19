@@ -23,8 +23,8 @@ export const Spinner = styled.div`
   border: 3px solid #0fe456;
   border-top: 3px solid transparent;
   position: fixed;
-  top: 40%;
-  left: 50%;
+  bottom: 50%;
+  right: 50%;
   z-index: 50;
   transform: translate(-50%, -50%);
   animation: loading 1s infinite;

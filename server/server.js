@@ -7,6 +7,8 @@ const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
 const userAuthRoutes = require("./Routes/userAuthRoutes");
+const blogRoutes = require('./Routes/blogRoutes')
+const userProfileRoutes = require('./Routes/userProfileRoutes');
 const app = express();
 
 require('./passport-configs/localAuth-config');
@@ -40,6 +42,8 @@ app.use(passport.session());
 // __________________________ ROUTES __________________________
 
 app.use(userAuthRoutes);
+app.use(blogRoutes);
+app.use(userProfileRoutes);
 
 // ____________________________________________________________
 

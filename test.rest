@@ -1,0 +1,15 @@
+###
+DELETE http://localhost:8080/bookmark?id=6145df8502b04953eafca397
+
+###
+POST http://localhost:8080/login/local
+Content-Type: application/json
+
+{
+    "username": "rohitdhas",
+    "password": "rohit"
+}
+
+
+### 
+GET http://localhost:8080/drafts

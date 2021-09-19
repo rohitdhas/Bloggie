@@ -1,8 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700;900&family=Montserrat:wght@500;700;800&display=swap");
+
+:root {
+  --primary-color: #0fe456;
+  --secondary-color: #2bb0ee;
+  --secondary-light-color: #63c0eb;
+  --warning-color: #ec4f34;
+  --warning-light-color: #ee6d57;
+  --dark-color: #3a3a3a;
+}
 
 * {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", "Josefin Sans", sans-serif;
 }
 
 body {

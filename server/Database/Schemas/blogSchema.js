@@ -35,6 +35,11 @@ const Blog = new Schema({
     tags: {
         type: Array,
         required: true,
+    },
+    published: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 

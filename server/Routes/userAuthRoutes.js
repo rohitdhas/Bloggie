@@ -21,7 +21,7 @@ router.get('/auth/google/callback',
 
 // __________________________Other Routes__________________________
 
-router.get('/getUser', (req, res) => {
+router.get('/userdata', (req, res) => {
     if (!req.user) res.send({ message: "Not Logged In!", success: false })
     else res.send({ data: req.user, success: true })
 })
@@ -34,12 +34,5 @@ router.get('/logout', (req, res) => {
     req.logOut();
     res.send({ messagae: "Logged Out!", success: true })
 })
-
-// __________________________Middlewares__________________________
-
-// function isLoggedIn(req, res, next) {
-//     if (!req.user) return res.status(401).send({ message: 'Not logged In!', success: false });
-//     else next()
-// }
 
 module.exports = router;

@@ -28,16 +28,3 @@ export function checkAuthenticated() {
             }
         });
 }
-
-export function getAndSetUserData(setState) {
-    startLoader()
-    fetch("http://localhost:8080/getUser", {
-        credentials: "include",
-    })
-        .then((res) => res.json())
-        .then(({ data }) => {
-            stopLoader();
-            if (!data) return;
-            else setState(data);
-        });
-}

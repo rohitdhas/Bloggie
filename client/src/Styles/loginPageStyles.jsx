@@ -45,7 +45,7 @@ export const Page = styled.div`
 `;
 
 export const LeftSection = styled.div`
-  background-color: #0fe456;
+  background-color: var(--primary-color);
   color: white;
 
   .centered {
@@ -68,7 +68,7 @@ export const LoginForm = styled.div`
   form {
     #message_card {
       display: none;
-      background-color: #ec4f34;
+      background-color: var(--warning-color);
       color: white;
       padding: 10px;
       border-radius: 5px;
@@ -98,7 +98,7 @@ export const LoginForm = styled.div`
         border: 2px solid grey;
       }
       &:focus {
-        border: 2px solid #2bb0ee;
+        border: 2px solid var(--secondary-color);
         box-shadow: 1px 7px 14px -15px rgba(0, 0, 0, 0.8);
       }
     }
@@ -107,7 +107,7 @@ export const LoginForm = styled.div`
       cursor: pointer;
       border: none;
       color: white;
-      background-color: #0d98d8;
+      background-color: var(--secondary-color);
       font-weight: bold;
       i {
         margin-right: 5px;
@@ -115,7 +115,7 @@ export const LoginForm = styled.div`
       }
 
       &:hover {
-        background-color: #47afdf;
+        background-color: var(--secondary-light-color);
       }
     }
 

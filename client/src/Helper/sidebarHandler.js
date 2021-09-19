@@ -6,7 +6,7 @@ export default function toggleListItem() {
     })
 
     const path = window.location.pathname;
-    if (path === '/' || path.includes('post')) {
+    if (path === '/' || path.includes('blog')) {
         li = document.querySelector('li.feed');
     } else if (path.includes('profile')) {
         li = document.querySelector('li.profile');
