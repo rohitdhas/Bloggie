@@ -12,4 +12,19 @@ Content-Type: application/json
 
 
 ### 
-GET http://localhost:8080/drafts
+PUT  http://localhost:8080/blog?id=614816a405152901993ee394
+Content-Type: application/json
+
+{
+    "title": "An Example Blog by Rohit Dhas. Enjoy!",
+    "snippit": "This is an example blog by rohit dhas on the worlds best bloggin platform ever created on the earth so enjoy this blog.",
+    "markdown": "---\n __Advertisement :)__\n**This is bold text**\n\n__This is bold text__\n\n*This is italic text*\n\n_This is italic text_\n\n1. Lorem ipsum dolor sit amet\n\n2. Consectetur adipiscing elit\n\n3. Integer molestie lorem at massa\n\n# Syntax highlighting\n\n``` js\n\nvar foo = function (bar)\n{\treturn bar++;\n};\n\nconsole.log(foo(5));\n\n```",
+    "writtenBy": "rohitdhas",
+    "tags": ["first", "markdown"],
+    "published": true,
+    "coverImage": "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg"
+}
+
+###
+DELETE  http://localhost:8080/blog?id=614816c605152901993ee39d
+

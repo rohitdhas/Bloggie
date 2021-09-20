@@ -1,12 +1,14 @@
 const Blog = require('../Database/Schemas/blogSchema');
 
+const errResponse = { message: "Something went wrong!", success: false }
+
 const getOneBlog = (req, res) => {
     const id = req.query.id;
     Blog.findById(id)
         .then(data => res.send({ data, success: true }))
         .catch(err => {
             console.log(err);
-            res.status(500).send({ message: "Something went wrong!", success: false })
+            res.status(500).send(errResponse)
         })
 }
 
@@ -17,7 +19,7 @@ const createNewBlog = (req, res) => {
         res.send({ message: "Blog Created!", success: true })
     } catch (err) {
         console.error(err);
-        res.status(500).send({ message: "Something went wrong!", success: false })
+        res.status(500).send(errResponse)
     }
 }
 
@@ -30,7 +32,7 @@ const updateBlog = (req, res) => {
         .then(() => res.send({ message: "Document Updated!", success: true }))
         .catch(err => {
             console.error(err);
-            res.status(500).send({ message: "Something went wrong!", success: false })
+            res.status(500).send(errResponse)
         })
 }
 
@@ -41,7 +43,7 @@ const deleteBlog = (req, res) => {
         .then(() => res.send({ message: "Document Deleted!", success: true }))
         .catch(err => {
             console.error(err);
-            res.status(500).send({ message: "Something went wrong!", success: false })
+            res.status(500).send(errResponse)
         })
 }
 
@@ -50,7 +52,7 @@ const getAllBlogs = (req, res) => {
         .then(data => res.send({ data, success: true }))
         .catch(err => {
             console.log(err);
-            res.end()
+            res.status(500).send(errResponse)
         })
 }
 
@@ -60,7 +62,7 @@ const removeDraft = (req, res) => {
     Blog.findOneAndDelete({ $and: [{ username }, { _id: id }, { published: false }] })
         .then(() => res.send({ message: "Draft Deleted!", success: true }))
         .catch(() => {
-            res.status(500).send({ message: "Something went wrong!", success: false })
+            res.status(500).send(errResponse)
         })
 }
 

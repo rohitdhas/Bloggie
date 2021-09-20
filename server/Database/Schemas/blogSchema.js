@@ -40,6 +40,9 @@ const Blog = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    coverImage: {
+        type: String,
     }
 })
 
