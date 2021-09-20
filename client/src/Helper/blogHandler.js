@@ -27,3 +27,4 @@ export function removeBookmark(e, id, setState) {
   }
   remove('bookmark', id, setState)
 }
+

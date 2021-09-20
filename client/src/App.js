@@ -9,6 +9,7 @@ import Drafts from './Components/drafts';
 import Profile from './Components/profile';
 import Loader from './Components/loader'
 import Editor from './Components/editor'
+import BlogPreviewer from './Components/blogPreviewer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/bookmarks" component={Bookmarks} />
         <Route exact path="/editor" component={Editor} />
         <Route exact path="/profile/:username" component={Profile} />
+        <Route exact path="/blog/:id" component={BlogPreviewer} />
       </Switch>
     </Router>
   );
