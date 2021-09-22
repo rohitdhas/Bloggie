@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const userAuthRoutes = require("./Routes/userAuthRoutes");
 const blogRoutes = require('./Routes/blogRoutes')
 const userProfileRoutes = require('./Routes/userProfileRoutes');
+const blogActionRoutes = require('./Routes/blogActionRoutes');
 const app = express();
 
 require('./passport-configs/localAuth-config');
@@ -19,6 +20,7 @@ require('./Database/DbConnection');
 
 // __________________________ MIDDLEWARES __________________________
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use(
     cors({
         origin: process.env.CLIENT_URL,
@@ -44,6 +46,7 @@ app.use(passport.session());
 app.use(userAuthRoutes);
 app.use(blogRoutes);
 app.use(userProfileRoutes);
+app.use(blogActionRoutes)
 
 // ____________________________________________________________
 

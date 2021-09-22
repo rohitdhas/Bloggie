@@ -12,7 +12,6 @@ const Blog = new Schema({
     },
     markdown: {
         type: String,
-        required: true
     },
     datePosted: {
         type: String,
@@ -22,28 +21,18 @@ const Blog = new Schema({
         type: String,
         required: true
     },
-    likes: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    bookmarks: {
-        type: Number,
-        required: true,
-        default: 0
-    },
     tags: {
         type: Array,
-        required: true,
     },
     published: {
         type: Boolean,
-        required: true,
         default: false
     },
-    coverImage: {
+    coverImageUrl: {
         type: String,
-    }
+    },
+    likedBy: Array,
+    bookmarkedBy: Array
 })
 
 module.exports = mongoose.model('Blog', Blog);
