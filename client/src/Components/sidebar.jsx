@@ -1,20 +1,22 @@
 import { Bar } from "../Styles/sidebarStyles";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Media/blog_icon.png";
 import { logout } from "../Helper/userAuth";
+import { updateUserProfile } from "../Helper/userProfileHandler";
 import toggleListItem from "../Helper/sidebarHandler";
-import { getAndSet } from "../Helper/blogHandler";
 import { addActiveClass } from "../Helper/toggler";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function SideBar() {
-  const [userData, setUserData] = useState({});
   const unwantedPaths = ["/login", "/register"];
+  const userData = useSelector((state) => state.userProfile);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     toggleListItem();
-    getAndSet("userdata", setUserData);
+    updateUserProfile(dispatch);
   }, [location.pathname]);
 
   if (!unwantedPaths.includes(location.pathname)) {
@@ -25,7 +27,7 @@ export default function SideBar() {
             <img src={logo} alt="logo" id="site_logo" />
           </li>
         </Link>
-        {Object.keys(userData).length === 0 ? (
+        {!userData.username ? (
           <Link to="/login">
             <li>
               <i className="fas fa-sign-in-alt"></i>
@@ -76,11 +78,11 @@ export default function SideBar() {
             <span>Bookmarks</span>
           </li>
         </Link>
-        {Object.keys(userData).length === 0 ? (
+        {!userData.username ? (
           <></>
         ) : (
           <Link to="#">
-            <li onClick={() => logout(setUserData)}>
+            <li onClick={() => logout(dispatch)}>
               <i className="fas fa-arrow-circle-left"></i>
               <span>Logout</span>
             </li>

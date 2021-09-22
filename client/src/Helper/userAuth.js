@@ -1,6 +1,7 @@
 import { startLoader, stopLoader } from "../Components/loader";
+import { setProfileData } from '../Redux/profile';
 
-export function logout(setState) {
+export function logout(dispatcher) {
     startLoader()
     fetch("http://localhost:8080/logout", {
         credentials: "include",
@@ -9,7 +10,12 @@ export function logout(setState) {
         .then(({ success }) => {
             stopLoader();
             if (success) {
-                setState({});
+                dispatcher(setProfileData({
+                    name: "",
+                    username: "",
+                    email: "",
+                    profileImage: ""
+                }))
                 window.location = '/'
             }
         });

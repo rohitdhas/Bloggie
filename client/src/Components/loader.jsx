@@ -3,7 +3,7 @@ import { Overlay, Spinner } from "../Styles/loaderStyles";
 export default function Loader() {
   return (
     <>
-      <Overlay onClick={stopLoader} id="loader_overlay" />
+      <Overlay id="loader_overlay" />
       <Spinner id="loader" />
     </>
   );

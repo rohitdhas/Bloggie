@@ -23,7 +23,7 @@ export default function Drafts() {
         <h1>Nothing to Show Here!</h1>
       ) : (
         drafts.map((draft) => {
-          return <Draft setState={setDrafts} blog={draft} />;
+          return <Draft key={draft._id} setState={setDrafts} blog={draft} />;
         })
       )}
     </Page>
@@ -36,14 +36,15 @@ export function Draft({ blog, setState }) {
       <DraftCard>
         <section>
           <div className="blog_title">
-            <a href="#">{blog.title}</a>
+            <a href={`/editor/draft/${blog._id}`}>{blog.title}</a>
           </div>
           <p className="snippit">
             Last edited {blog.datePosted.split(", ")[0]} - {blog.snippit}...{" "}
-            <a href="#">Read more</a>{" "}
           </p>
         </section>
-        <img src={blog.coverImage} alt="cover" />
+        <div className="img_container">
+          <img src={blog.coverImageUrl} alt="cover" />
+        </div>
         <i
           className="fas fa-trash"
           onClick={() => addActiveClass(["card_overlay", "card"])}

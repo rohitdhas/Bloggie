@@ -21,7 +21,10 @@ export default function BlogPreviewer() {
         ) : (
           <div>
             <div className="blog_title">{blogData.title}</div>
-            <img src={blogData.coverImage} alt="coverImage" />
+            {!blogData.coverImageUrl ? null : (
+              <img src={blogData.coverImageUrl} alt="coverImage" />
+            )}
+
             <div
               className="markdown"
               dangerouslySetInnerHTML={{
@@ -31,6 +34,7 @@ export default function BlogPreviewer() {
           </div>
         )}
       </Previewer>
+      <BlogActionsCard />
     </>
   );
 }
@@ -39,7 +43,10 @@ const BlogActionsCard = () => {
   return (
     <ActionsCard>
       <li>
-        <i className="far fa-bookmark"></i>
+        <i className="fas fa-bookmark"></i>
+      </li>
+      <li>
+        <i className="fas fa-heart"></i>
       </li>
     </ActionsCard>
   );

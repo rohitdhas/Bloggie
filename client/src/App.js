@@ -11,11 +11,17 @@ import Loader from './Components/loader'
 import Editor from './Components/editor'
 import BlogPreviewer from './Components/blogPreviewer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Notification from './Components/notification';
+import 'highlight.js/styles/base16/circus.css';
+import { useSelector } from 'react-redux';
 
 function App() {
 
+  const { notifications } = useSelector(state => state.userProfile);
+
   return (
     <Router>
+      <Notification notificationsArray={notifications} />
       <SearchBar />
       <Sidebar />
       <Loader />
@@ -26,6 +32,7 @@ function App() {
         <Route exact path="/drafts" component={Drafts} />
         <Route exact path="/bookmarks" component={Bookmarks} />
         <Route exact path="/editor" component={Editor} />
+        <Route exact path="/editor/draft/:id" component={Editor} />
         <Route exact path="/profile/:username" component={Profile} />
         <Route exact path="/blog/:id" component={BlogPreviewer} />
       </Switch>

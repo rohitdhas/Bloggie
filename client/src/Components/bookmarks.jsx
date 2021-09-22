@@ -39,7 +39,9 @@ const BookmarkCard = ({ blog, setState }) => {
           Blog by <a href={`/profile/${blog.writtenBy}`}>{blog.writtenBy}</a>
         </span>
       </section>
-      <img src={blog.coverImage} alt="cover" />
+      <div className="img_container">
+        <img src={blog.coverImageUrl} alt="cover" />
+      </div>
       <i
         className="fas fa-bookmark"
         onClick={(e) => removeBookmark(e, blog._id, setState)}

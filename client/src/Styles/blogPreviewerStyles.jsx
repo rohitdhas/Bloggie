@@ -13,4 +13,24 @@ export const Previewer = styled.div`
   }
 `;
 
-export const ActionsCard = styled.ul``;
+export const ActionsCard = styled.ul`
+  position: fixed;
+  top: 20%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 10px;
+
+  li {
+    margin: 0 10px;
+    cursor: pointer;
+    list-style: none;
+
+    i {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+`;
