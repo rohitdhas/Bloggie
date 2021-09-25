@@ -117,6 +117,25 @@ export const MobileBar = styled(Bar)`
         box-shadow: 1px 7px 14px -15px rgba(0, 0, 0, 0.8);
       }
     }
+
+    .searchResults {
+      margin-top: 10px;
+      padding: 0 10px;
+      border-radius: 5px;
+      background: white;
+
+      a {
+        text-decoration: none;
+
+        .search_result {
+          text-align: start;
+          padding: 5px 0;
+          color: var(--primary-color);
+        }
+
+        /* padding: 5px 0; */
+      }
+    }
   }
 
   li.profile_options {

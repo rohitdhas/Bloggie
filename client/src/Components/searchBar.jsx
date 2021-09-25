@@ -8,8 +8,10 @@ export default function SearchBar() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (!userInput) return;
-    else searchFor(userInput, setSearchResults);
+    if (!userInput) {
+      setSearchResults([]);
+      return;
+    } else searchFor(userInput, setSearchResults);
   }, [userInput]);
 
   return (

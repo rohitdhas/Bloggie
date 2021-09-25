@@ -1,6 +1,42 @@
 import { startLoader, stopLoader } from "../Components/loader";
 import { setProfileData } from '../Redux/profile';
 
+export function login(e, type, usernameRef, passwordRef, messageRef) {
+    e.preventDefault();
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
+
+    if (!username || !password) {
+        messageRef.current.innerHTML = "Missing Credentials!";
+        messageRef.current.classList.add("active");
+        return;
+    }
+
+    startLoader();
+    fetch(`http://localhost:8080/login/${type}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username,
+            password,
+        }),
+        credentials: "include",
+    })
+        .then((res) => res.json())
+        .then(({ message, success }) => {
+            stopLoader();
+            if (success) {
+                window.location = "/";
+            } else {
+                messageRef.current.innerHTML = message;
+                messageRef.current.classList.add("active");
+            }
+        })
+        .catch((err) => console.log(err));
+}
+
 export function logout(dispatcher) {
     startLoader()
     fetch("http://localhost:8080/logout", {

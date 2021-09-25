@@ -32,7 +32,8 @@ const BlogCard = ({ blog }) => {
           <a href={`/blog/${blog._id}`}>{blog.title}</a>
         </div>
         <p className="snippit">
-          Posted on {blog.datePosted.split(", ")[0]} - {blog.snippit}...{" "}
+          Posted on {blog.datePosted.split(", ")[0]} -{" "}
+          {blog.snippit.split(" ").slice(0, 20).join(" ")}...{" "}
           <a href={`/blog/${blog._id}`}>Read more</a>{" "}
         </p>
         <span>

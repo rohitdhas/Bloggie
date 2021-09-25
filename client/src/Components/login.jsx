@@ -1,8 +1,7 @@
 import icon from "../Media/blog_icon.png";
 import { Page, LeftSection, LoginForm } from "../Styles/loginPageStyles";
 import { useRef, useEffect } from "react";
-import { checkAuthenticated } from "../Helper/userAuth";
-import { startLoader, stopLoader } from "./loader";
+import { checkAuthenticated, login } from "../Helper/userAuth";
 
 export default function Login() {
   const usernameRef = useRef("");
@@ -13,41 +12,6 @@ export default function Login() {
     checkAuthenticated();
   }, []);
 
-  function LocalLogin(e) {
-    e.preventDefault();
-    const username = usernameRef.current.value;
-    const password = passwordRef.current.value;
-
-    if (!username || !password) {
-      messageRef.current.innerHTML = "Missing Credentials!";
-      messageRef.current.classList.add("active");
-      return;
-    }
-
-    startLoader();
-    fetch("http://localhost:8080/login/local", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ message, success }) => {
-        stopLoader();
-        if (success) {
-          window.location = "/";
-        } else {
-          messageRef.current.innerHTML = message;
-          messageRef.current.classList.add("active");
-        }
-      })
-      .catch((err) => console.log(err));
-  }
   return (
     <Page>
       <LeftSection className="split left">
@@ -60,7 +24,12 @@ export default function Login() {
         </div>
       </LeftSection>
       <LoginForm className="split right">
-        <form className="centered" onSubmit={LocalLogin}>
+        <form
+          className="centered"
+          onSubmit={(e) =>
+            login(e, "local", usernameRef, passwordRef, messageRef)
+          }
+        >
           <p>Login to Bloggie</p>
           <div id="message_card" ref={messageRef}></div>
           <div>
@@ -74,7 +43,12 @@ export default function Login() {
             />
           </div>
           <button type="submit">Login</button>
-          <button type="button">
+          <button
+            type="button"
+            onClick={(e) =>
+              login(e, "google", usernameRef, passwordRef, messageRef)
+            }
+          >
             <i className="fab fa-google"></i>
             <span>Login with Google</span>
           </button>

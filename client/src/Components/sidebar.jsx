@@ -1,13 +1,14 @@
-import { Bar, MobileBar } from "../Styles/sidebarStyles";
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import logo from "../Media/blog_icon.png";
+import toggleListItem from "../Helper/sidebarHandler";
+import { Bar, MobileBar } from "../Styles/sidebarStyles";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { logout } from "../Helper/userAuth";
 import { updateUserProfile } from "../Helper/userProfileHandler";
-import toggleListItem from "../Helper/sidebarHandler";
-import { addActiveClass } from "../Helper/toggler";
+import { addActiveClass, removeActiveClass } from "../Helper/toggler";
 import { useSelector, useDispatch } from "react-redux";
 import { closeSidebar } from "./mobileNav";
+import { searchFor } from "../Helper/searchHandler";
 
 export default function SideBar() {
   const unwantedPaths = ["/login", "/register"];
@@ -98,6 +99,8 @@ export function MobileSidebar() {
   const userData = useSelector((state) => state.userProfile);
   const location = useLocation();
   const dispatch = useDispatch();
+  const [userInput, setUserInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     updateUserProfile(dispatch);
@@ -110,6 +113,14 @@ export function MobileSidebar() {
     });
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!userInput) {
+      setSearchResults([]);
+      return;
+    }
+    searchFor(userInput, setSearchResults);
+  }, [userInput]);
+
   return (
     <MobileBar id="mobile_sidebar">
       <li className="sidebar_options">
@@ -119,7 +130,31 @@ export function MobileSidebar() {
         <i className="far fa-times-circle" onClick={closeSidebar}></i>
       </li>
       <li className="sidebar_search">
-        <input type="text" placeholder="Search" />
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setUserInput(e.target.value)}
+          value={userInput}
+        />
+        <div className="searchResults">
+          {!searchResults.length
+            ? null
+            : searchResults.map((result) => {
+                return (
+                  <a href={`/blog/${result._id}`}>
+                    <div
+                      className="search_result"
+                      onClick={() =>
+                        removeActiveClass(["searchbar_overlay", "searchbar"])
+                      }
+                      key={result._id}
+                    >
+                      {result.title}
+                    </div>
+                  </a>
+                );
+              })}
+        </div>
       </li>
       {!userData.username ? (
         <Link to="/login">

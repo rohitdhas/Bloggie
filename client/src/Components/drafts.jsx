@@ -40,7 +40,8 @@ export function Draft({ blog, setState }) {
             <a href={`/editor/draft/${blog._id}`}>{blog.title}</a>
           </div>
           <p className="snippit">
-            Last edited {blog.datePosted.split(", ")[0]} - {blog.snippit}...{" "}
+            Last edited {blog.datePosted.split(", ")[0]} -{" "}
+            {blog.snippit.split(" ").slice(0, 20).join(" ")}...{" "}
           </p>
         </section>
         <div className="img_container">
