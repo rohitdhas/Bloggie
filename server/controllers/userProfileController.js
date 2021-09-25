@@ -1,9 +1,37 @@
 const Blog = require('../Database/Schemas/blogSchema');
 const User = require('../Database/Schemas/userSchema');
 
+const getProfile = (req, res) => {
+    const username = req.query.username;
+    let safeData = {};
+
+    User.findOne({ username })
+        .then((data) => {
+            if (!data) res.status(404).send({ message: "No User Found!", success: false })
+            else {
+                safeData = {
+                    username: data.username,
+                    name: data.name,
+                    profileImage: data.profileImage,
+                    email: data.email
+                }
+
+                Blog.find({ $and: [{ writtenBy: username }, { published: true }] }, (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        safeData.blogs = data;
+                        res.send({ data: safeData, success: true })
+                    }
+                })
+            }
+        })
+        .catch(err => res.status(500).end())
+}
+
 const getBookmarks = (req, res) => {
-    const { bookmarks } = req.user;
-    Blog.find({ _id: { $in: bookmarks } })
+    const { username } = req.user;
+    Blog.find({ bookmarkedBy: { $in: username } })
         .then(data => res.send({ data }))
         .catch(err => {
             console.log(err);
@@ -35,4 +63,4 @@ const removeBookmark = (req, res) => {
         })
 }
 
-module.exports = { getBookmarks, getDrafts, removeBookmark }
+module.exports = { getProfile, getBookmarks, getDrafts, removeBookmark }

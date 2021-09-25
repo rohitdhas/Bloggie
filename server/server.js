@@ -10,6 +10,7 @@ const userAuthRoutes = require("./Routes/userAuthRoutes");
 const blogRoutes = require('./Routes/blogRoutes')
 const userProfileRoutes = require('./Routes/userProfileRoutes');
 const blogActionRoutes = require('./Routes/blogActionRoutes');
+const searchRoutes = require('./Routes/searchRoutes');
 const app = express();
 
 require('./passport-configs/localAuth-config');
@@ -47,6 +48,7 @@ app.use(userAuthRoutes);
 app.use(blogRoutes);
 app.use(userProfileRoutes);
 app.use(blogActionRoutes)
+app.use(searchRoutes)
 
 // ____________________________________________________________
 

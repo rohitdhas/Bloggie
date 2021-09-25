@@ -24,10 +24,6 @@ const UserSchema = new mongoose.Schema({
     drafts: {
         type: Array,
         default: []
-    },
-    bookmarks: {
-        type: Array,
-        default: []
     }
 })
 

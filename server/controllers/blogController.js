@@ -57,7 +57,7 @@ const deleteBlog = (req, res) => {
 }
 
 const getAllBlogs = (req, res) => {
-    Blog.find({ published: true })
+    Blog.find({ published: true }).sort({ $natural: -1 })
         .then(data => res.send({ data, success: true }))
         .catch(err => {
             console.log(err);

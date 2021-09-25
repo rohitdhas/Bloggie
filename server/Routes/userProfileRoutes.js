@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const { removeDraft } = require('../controllers/blogController');
-const { getBookmarks, getDrafts, removeBookmark } = require('../controllers/userProfileController');
+const { getBookmarks, getDrafts, removeBookmark, getProfile } = require('../controllers/userProfileController');
 
+router.get('/profile', getProfile);
 router.get('/bookmarks', isAuthenticated, getBookmarks);
 router.get('/drafts', isAuthenticated, getDrafts);
 router.delete('/bookmark', isAuthenticated, removeBookmark);
