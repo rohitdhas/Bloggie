@@ -9,11 +9,14 @@ import Drafts from './Components/drafts';
 import Profile from './Components/profile';
 import Loader from './Components/loader'
 import Editor from './Components/editor'
+import PageNotFound from './Components/404';
 import BlogPreviewer from './Components/blogPreviewer';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Notification from './Components/notification';
-import 'highlight.js/styles/base16/circus.css';
+import MobileNav from './Components/mobileNav';
+import { MobileSidebar } from './Components/sidebar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import "highlight.js/styles/github.css";
 
 function App() {
 
@@ -21,6 +24,10 @@ function App() {
 
   return (
     <Router>
+      {/* Mobile Components Start*/}
+      <MobileNav />
+      <MobileSidebar />
+      {/* Mobile Components End*/}
       <Notification notificationsArray={notifications} />
       <SearchBar />
       <Sidebar />
@@ -35,6 +42,7 @@ function App() {
         <Route exact path="/editor/draft/:id" component={Editor} />
         <Route exact path="/profile/:username" component={Profile} />
         <Route exact path="/blog/:id" component={BlogPreviewer} />
+        <Route component={PageNotFound} />
       </Switch>
     </Router>
   );

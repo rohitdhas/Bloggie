@@ -24,6 +24,46 @@ export const Page = styled.div`
       }
     }
   }
+
+  .help_icon {
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+    font-size: 3rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: bold;
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &::after {
+      font-family: "Montserrat";
+      content: "Markdown Guide";
+      padding: 5px;
+      background-color: #2b2b2b;
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 5px;
+      margin: 5px;
+      display: block;
+      transition: all 0.3s;
+      position: relative;
+      right: 10px;
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    margin: 10px 0;
+
+    .help_icon {
+      display: none;
+    }
+  }
 `;
 
 export const TopBar = styled.div`
@@ -56,6 +96,16 @@ export const TopBar = styled.div`
       background-color: var(--secondary-light-color);
     }
   }
+
+  @media (max-width: 700px) {
+    .editor_title {
+      display: none;
+    }
+    .buttons > button {
+      padding: 10px;
+      margin: 0 5px;
+    }
+  }
 `;
 
 export const Toolbar = styled.ul`
@@ -78,6 +128,10 @@ export const Toolbar = styled.ul`
     &:hover {
       background-color: #e2e2e2;
     }
+  }
+
+  @media (max-width: 700px) {
+    overflow-x: auto;
   }
 `;
 
@@ -142,6 +196,14 @@ export const EditSection = styled.div`
       top: 0px;
       font-weight: bold;
       color: var(--primary-color);
+    }
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+
+    #previewer {
+      margin: 10px 0;
     }
   }
 `;

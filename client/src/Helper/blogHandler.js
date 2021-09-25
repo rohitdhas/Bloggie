@@ -1,5 +1,5 @@
 import { startLoader, stopLoader } from "../Components/loader";
-import { remove } from "./userProfileHandler";
+import { notify } from "../Redux/profile";
 
 export function getAndSet(path, setState) {
   startLoader();
@@ -15,16 +15,21 @@ export function getAndSet(path, setState) {
     });
 }
 
-export function removeBookmark(e, id, setState) {
-  const icon = e.target;
-
-  if (icon.classList.contains("far")) {
-    icon.classList.remove("far");
-    icon.classList.add("fas");
-  } else {
-    icon.classList.remove("fas");
-    icon.classList.add("far");
-  }
-  remove('bookmark', id, setState)
+export function toggleLikesOrBookmarks(type, id, setState, dispatcher) {
+  fetch(`http://localhost:8080/blog-${type}?id=${id}`, {
+    credentials: 'include',
+    method: 'PUT'
+  }).then(res => res.json())
+    .then(({ success, message }) => {
+      if (success) {
+        if (window.location.pathname.includes('bookmarks')) {
+          getAndSet('bookmarks', setState)
+        }
+        else {
+          getAndSet(`blog?id=${id}`, setState);
+        }
+      } else {
+        dispatcher(notify({ message, success }))
+      }
+    })
 }
-

@@ -69,4 +69,11 @@ export const ConfirmationCard = styled.div`
   &.active {
     display: block;
   }
+
+  @media (max-width: 500px) {
+    p {
+      font-size: 1rem;
+      width: 100%;
+    }
+  }
 `;

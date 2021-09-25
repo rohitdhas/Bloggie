@@ -1,8 +1,9 @@
-import marked from "marked";
+import { md } from "../Helper/editorFunctions";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getAndSet } from "../Helper/blogHandler";
+import { getAndSet, toggleLikesOrBookmarks } from "../Helper/blogHandler";
 import { Previewer, ActionsCard } from "../Styles/blogPreviewerStyles";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function BlogPreviewer() {
   const params = useParams();
@@ -13,11 +14,18 @@ export default function BlogPreviewer() {
     getAndSet(`blog?id=${id}`, setBlogData);
   }, []);
 
+  useEffect(() => {
+    const previewer = document.querySelector(".markdown");
+    if (previewer) {
+      previewer.innerHTML = md.render(`${blogData.markdown}`);
+    }
+  }, [blogData]);
+
   return (
     <>
       <Previewer id="blog_previewer">
         {!Object.keys(blogData).length ? (
-          <h1>Getting Data From Server!</h1>
+          <div className="page_status">Loading Blog...</div>
         ) : (
           <div>
             <div className="blog_title">{blogData.title}</div>
@@ -25,29 +33,95 @@ export default function BlogPreviewer() {
               <img src={blogData.coverImageUrl} alt="coverImage" />
             )}
 
-            <div
-              className="markdown"
-              dangerouslySetInnerHTML={{
-                __html: marked(blogData.markdown),
-              }}
-            ></div>
+            <div className="markdown"></div>
           </div>
         )}
       </Previewer>
-      <BlogActionsCard />
+      <BlogActionsCard blogData={blogData} setState={setBlogData} />
     </>
   );
 }
 
-const BlogActionsCard = () => {
+const BlogActionsCard = ({ blogData, setState }) => {
+  const { username } = useSelector((state) => state.userProfile);
+  const dispatch = useDispatch();
+
   return (
-    <ActionsCard>
-      <li>
-        <i className="fas fa-bookmark"></i>
-      </li>
-      <li>
-        <i className="fas fa-heart"></i>
-      </li>
-    </ActionsCard>
+    <>
+      {!Object.keys(blogData).length ? null : (
+        <ActionsCard>
+          <div className="writer_info">
+            Blog by -{" "}
+            <a href={`/profile/${blogData.writtenBy}`}>
+              <strong>{blogData.writtenBy}</strong>
+            </a>
+          </div>
+          <div className="icons">
+            {blogData.bookmarkedBy.includes(username) ? (
+              <li>
+                <i
+                  onClick={() =>
+                    toggleLikesOrBookmarks(
+                      "bookmarks",
+                      blogData._id,
+                      setState,
+                      dispatch
+                    )
+                  }
+                  className="fas fa-bookmark"
+                ></i>
+                <strong>{blogData.bookmarkedBy.length}</strong>
+              </li>
+            ) : (
+              <li>
+                <i
+                  onClick={() =>
+                    toggleLikesOrBookmarks(
+                      "bookmarks",
+                      blogData._id,
+                      setState,
+                      dispatch
+                    )
+                  }
+                  className="far fa-bookmark"
+                ></i>
+                <strong>{blogData.bookmarkedBy.length}</strong>
+              </li>
+            )}
+            {blogData.likedBy.includes(username) ? (
+              <li>
+                <i
+                  onClick={() =>
+                    toggleLikesOrBookmarks(
+                      "likes",
+                      blogData._id,
+                      setState,
+                      dispatch
+                    )
+                  }
+                  className="fas fa-heart"
+                ></i>
+                <strong>{blogData.likedBy.length}</strong>
+              </li>
+            ) : (
+              <li>
+                <i
+                  onClick={() =>
+                    toggleLikesOrBookmarks(
+                      "likes",
+                      blogData._id,
+                      setState,
+                      dispatch
+                    )
+                  }
+                  className="far fa-heart"
+                ></i>
+                <strong>{blogData.likedBy.length}</strong>
+              </li>
+            )}
+          </div>
+        </ActionsCard>
+      )}
+    </>
   );
 };

@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 export const NotificationCardBox = styled.ul`
   position: fixed;
-  bottom: 5%;
+  bottom: 10%;
   right: 5%;
   list-style: none;
 `;
 
 export const NotificationCard = styled.li`
-  transform: translateX(500px);
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   max-width: auto;
@@ -30,9 +29,11 @@ export const NotificationCard = styled.li`
     }
   }
 
-  transition: all 0.5s;
+  &.success {
+    background-color: var(--primary-color);
+  }
 
   &.active {
-    transform: translateX(0px);
+    display: flex;
   }
 `;

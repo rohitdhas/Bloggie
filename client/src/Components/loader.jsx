@@ -3,8 +3,9 @@ import { Overlay, Spinner } from "../Styles/loaderStyles";
 export default function Loader() {
   return (
     <>
-      <Overlay id="loader_overlay" />
-      <Spinner id="loader" />
+      <Overlay id="loader_overlay">
+        <Spinner id="loader" />
+      </Overlay>
     </>
   );
 }

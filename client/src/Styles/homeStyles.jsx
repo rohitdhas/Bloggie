@@ -5,9 +5,23 @@ export const Page = styled.div`
   h2 {
     border: 1px solid none;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--secondary-color);
     color: white;
+  }
+
+  .page_status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  @media (max-width: 750px) {
+    max-width: 100%;
+
+    h2 {
+      padding: 5px;
+    }
   }
 `;
 
@@ -30,7 +44,7 @@ export const BlogPost = styled.div`
     }
 
     .blog_title {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 700;
       margin-bottom: 10px;
     }
@@ -50,6 +64,7 @@ export const BlogPost = styled.div`
       height: 150px;
       width: 100%;
       &::after {
+        z-index: -1;
         content: "No Image";
         display: flex;
         justify-content: center;
@@ -63,6 +78,34 @@ export const BlogPost = styled.div`
         bottom: 0;
         border-radius: 7px;
         background-color: #cecece;
+      }
+    }
+  }
+
+  /* Media Queries for devices with small width */
+  @media (max-width: 750px) {
+    section {
+      width: 70%;
+      font-size: 0.8rem;
+
+      .blog_title {
+        font-size: 1.5rem;
+      }
+      .snippit {
+        color: #585555;
+        width: auto;
+        font-weight: 300;
+      }
+    }
+
+    .img_container {
+      height: 100px;
+
+      img {
+        height: 100px;
+        &::after {
+          font-size: 0.8rem;
+        }
       }
     }
   }

@@ -2,12 +2,13 @@
 
 :root {
   --primary-color: #0fe456;
+  --primary-light-color: #63e990;
   --secondary-color: #2bb0ee;
   --secondary-light-color: #63c0eb;
   --warning-color: #ec4f34;
   --warning-light-color: #ee6d57;
   --dark-color: #3a3a3a;
-  --code-background: rgb(112, 112, 112);
+  --code-background: rgb(184, 221, 255);
 }
 
 * {
@@ -21,8 +22,14 @@ body {
   margin-left: 250px;
 }
 
-/* pre {
+pre {
   background-color: var(--code-background);
   padding: 10px;
   border-radius: 5px;
-} */
+}
+
+@media (max-width: 750px) {
+  body {
+    margin: 60px 10px 0 10px;
+  }
+}

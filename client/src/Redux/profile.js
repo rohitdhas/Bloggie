@@ -5,7 +5,6 @@ const initialState = {
     username: "",
     email: "",
     profileImage: "",
-    bookmarks: [],
     notifications: []
 }
 
@@ -14,12 +13,11 @@ export const profileSlice = createSlice({
     initialState,
     reducers: {
         setProfileData: (state, action) => {
-            const { name, username, email, profileImage, bookmarks } = action.payload;
+            const { name, username, email, profileImage } = action.payload;
             state.name = name
             state.username = username
             state.email = email
             state.profileImage = profileImage
-            state.bookmarks = bookmarks
         },
         notify: (state, action) => {
             const message = action.payload;
@@ -28,9 +26,12 @@ export const profileSlice = createSlice({
         deleteNotification: (state, action) => {
             const notificationIndex = action.payload;
             state.notifications.splice(notificationIndex, 1);
+        },
+        clearNotifications: (state) => {
+            state.notifications = [];
         }
     },
 })
 
-export const { setProfileData, notify, deleteNotification } = profileSlice.actions
+export const { setProfileData, notify, deleteNotification, clearNotifications } = profileSlice.actions
 export default profileSlice.reducer;

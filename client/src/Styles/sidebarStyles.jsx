@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Bar = styled.ul`
-  background-color: #0fe456;
+  background-color: var(--primary-color);
   padding: 10px 0;
   width: 200px;
   margin: 0;
@@ -63,5 +63,72 @@ export const Bar = styled.ul`
         background-color: #09b409;
       }
     }
+  }
+
+  @media (max-width: 750px) {
+    display: none;
+  }
+`;
+
+export const MobileBar = styled(Bar)`
+  transform: translateX(700px);
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  list-style: none;
+  opacity: 0;
+  transition: all 0.3s;
+
+  li.sidebar_options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 10px 10px;
+
+    h2 {
+      text-decoration: none;
+      color: white;
+      margin: 8px 0 0 0;
+    }
+
+    i {
+      margin: 8px 0 0 0;
+      font-size: 1.5rem;
+      color: white;
+    }
+  }
+
+  li.sidebar_search {
+    margin: 0 10px;
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+
+      &:focus {
+        border: 2px solid var(--secondary-color);
+        box-shadow: 1px 7px 14px -15px rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
+
+  li.profile_options {
+    margin: 5px 0 0 0;
+  }
+
+  &.active {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  @media (min-width: 780px) {
+    display: none;
   }
 `;

@@ -1,7 +1,9 @@
 import { Page } from "../Styles/homeStyles";
 import { useEffect, useState } from "react";
-import { getAndSet, removeBookmark } from "../Helper/blogHandler";
+import { getAndSet, toggleLikesOrBookmarks } from "../Helper/blogHandler";
 import { Card } from "../Styles/bookmarkPageStyles";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Bookmarks() {
   const [blogs, setBlogs] = useState([]);
@@ -14,7 +16,7 @@ export default function Bookmarks() {
     <Page>
       <h2>Bookmarks</h2>
       {!blogs.length ? (
-        <h1>Nothing to Show Here!</h1>
+        <div className="page_status">Nothing to show here</div>
       ) : (
         blogs.map((blog) => {
           return <BookmarkCard blog={blog} setState={setBlogs} />;
@@ -25,6 +27,7 @@ export default function Bookmarks() {
 }
 
 const BookmarkCard = ({ blog, setState }) => {
+  const dispatch = useDispatch();
   return (
     <Card>
       <section>
@@ -36,7 +39,10 @@ const BookmarkCard = ({ blog, setState }) => {
           <a href={`/blog/${blog._id}`}>Read more</a>{" "}
         </p>
         <span>
-          Blog by <a href={`/profile/${blog.writtenBy}`}>{blog.writtenBy}</a>
+          Blog by -{" "}
+          <strong>
+            <Link to={`/profile/${blog.writtenBy}`}>{blog.writtenBy}</Link>
+          </strong>
         </span>
       </section>
       <div className="img_container">
@@ -44,7 +50,9 @@ const BookmarkCard = ({ blog, setState }) => {
       </div>
       <i
         className="fas fa-bookmark"
-        onClick={(e) => removeBookmark(e, blog._id, setState)}
+        onClick={() =>
+          toggleLikesOrBookmarks("bookmarks", blog._id, setState, dispatch)
+        }
       ></i>
     </Card>
   );

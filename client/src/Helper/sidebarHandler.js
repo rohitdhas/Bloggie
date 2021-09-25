@@ -1,14 +1,14 @@
-export default function toggleListItem() {
-    let li;
+export default function toggleListItem(username) {
     const listElements = document.querySelectorAll('li');
     listElements.forEach(item => {
         item.classList.remove('active');
     })
 
+    let li;
     const path = window.location.pathname;
     if (path === '/' || path.includes('blog')) {
         li = document.querySelector('li.feed');
-    } else if (path.includes('profile')) {
+    } else if (path.includes(`profile/${username}`)) {
         li = document.querySelector('li.profile');
     } else if (path.includes('editor')) {
         li = document.querySelector('li.editor');

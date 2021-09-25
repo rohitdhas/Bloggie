@@ -1,9 +1,16 @@
-import { Overlay, Bar } from "../Styles/searchBarStyles";
-import { useRef } from "react";
+import { Overlay, Bar, SearchResults } from "../Styles/searchBarStyles";
 import { removeActiveClass } from "../Helper/toggler";
+import { useState, useEffect } from "react";
+import { searchFor } from "../Helper/searchHandler";
 
 export default function SearchBar() {
-  const userInput = useRef("");
+  const [userInput, setUserInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    if (!userInput) return;
+    else searchFor(userInput, setSearchResults);
+  }, [userInput]);
 
   return (
     <>
@@ -13,8 +20,31 @@ export default function SearchBar() {
       />
       <Bar className="searchbar">
         <div>
-          <input type="text" placeholder="Search" ref={userInput} />
+          <input
+            type="text"
+            placeholder="Search Blogs"
+            onChange={(e) => setUserInput(e.target.value)}
+            value={userInput}
+          />
         </div>
+        <SearchResults>
+          {!searchResults.length
+            ? null
+            : searchResults.map((result) => {
+                return (
+                  <a href={`/blog/${result._id}`}>
+                    <li
+                      onClick={() =>
+                        removeActiveClass(["searchbar_overlay", "searchbar"])
+                      }
+                      key={result._id}
+                    >
+                      {result.title}
+                    </li>
+                  </a>
+                );
+              })}
+        </SearchResults>
       </Bar>
     </>
   );

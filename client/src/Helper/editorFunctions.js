@@ -63,7 +63,7 @@ export const md = new markdownIt().set({
 export function postBlog(title, snippit, markdown, coverImageUrl, writtenBy, published, dispatcher) {
     const data = { title, snippit, markdown, writtenBy, coverImageUrl, published }
     if (!snippit || !title) {
-        dispatcher(notify("Fill the required Fields!"))
+        dispatcher(notify({ message: "Fill the required Fields!", success: false }))
         return
     }
 
@@ -84,8 +84,11 @@ export function postBlog(title, snippit, markdown, coverImageUrl, writtenBy, pub
         body: JSON.stringify(data)
     })
         .then(res => res.json())
-        .then(({ message }) => {
-            dispatcher(notify(message))
+        .then(({ message, success }) => {
+            dispatcher(notify({ message, success }))
+            if (success) {
+                window.location.pathname = '/'
+            }
         })
         .catch(err => console.log(err))
 }

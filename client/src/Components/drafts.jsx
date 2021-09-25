@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { getAndSet } from "../Helper/blogHandler";
 import { Page } from "../Styles/homeStyles";
-import { remove } from "../Helper/userProfileHandler";
+import { removeDraft } from "../Helper/userProfileHandler";
 import { addActiveClass, removeActiveClass } from "../Helper/toggler";
 import {
   DraftCard,
   Overlay,
   ConfirmationCard,
 } from "../Styles/draftPageStyles";
+import { useDispatch } from "react-redux";
 
 export default function Drafts() {
   const [drafts, setDrafts] = useState([]);
@@ -20,7 +21,7 @@ export default function Drafts() {
     <Page>
       <h2>Drafts</h2>
       {!drafts.length ? (
-        <h1>Nothing to Show Here!</h1>
+        <div className="page_status">Nothing to show here</div>
       ) : (
         drafts.map((draft) => {
           return <Draft key={draft._id} setState={setDrafts} blog={draft} />;
@@ -56,16 +57,16 @@ export function Draft({ blog, setState }) {
 }
 
 const ConfirmRemove = ({ id, setState }) => {
+  const dispatch = useDispatch();
   return (
     <>
-      <Overlay
-        className="card_overlay"
-        onClick={() => removeActiveClass(["card_overlay", "card"])}
-      />
+      <Overlay className="card_overlay" />
       <ConfirmationCard className="card">
         <p>Are You Sure?</p>
         <div className="buttons">
-          <button onClick={() => remove("draft", id, setState)}>Yes</button>
+          <button onClick={() => removeDraft(id, setState, dispatch)}>
+            Yes
+          </button>
           <button onClick={() => removeActiveClass(["card_overlay", "card"])}>
             No
           </button>

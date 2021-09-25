@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Page, BlogPost } from "../Styles/homeStyles";
 import { getAndSet } from "../Helper/blogHandler";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -13,7 +14,7 @@ export default function Home() {
     <Page>
       <h2>My Feed</h2>
       {!blogs.length ? (
-        <h1>Nothing to Show Here!</h1>
+        <div className="page_status">Nothing to show here</div>
       ) : (
         blogs.map((blog) => {
           return <BlogCard blog={blog} />;
@@ -35,7 +36,10 @@ const BlogCard = ({ blog }) => {
           <a href={`/blog/${blog._id}`}>Read more</a>{" "}
         </p>
         <span>
-          Blog by <a href={`/profile/${blog.writtenBy}`}>{blog.writtenBy}</a>
+          Blog by -{" "}
+          <strong>
+            <Link to={`/profile/${blog.writtenBy}`}>{blog.writtenBy}</Link>
+          </strong>
         </span>
       </section>
       <div className="img_container">
