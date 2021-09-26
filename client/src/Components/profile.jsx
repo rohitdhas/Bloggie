@@ -4,7 +4,7 @@ import { getProfile, removePost } from "../Helper/userProfileHandler";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Overlay, ConfirmationCard } from "../Styles/draftPageStyles";
-import { addActiveClass, removeActiveClass } from "../Helper/toggler";
+import { openRemoverCard, closeRemoverCard } from "../Helper/toggler";
 
 export default function Profile() {
   const params = useParams();
@@ -21,6 +21,7 @@ export default function Profile() {
 
   useEffect(() => {
     setPermession(username === profileUsername);
+    document.title = `${profileUsername}'s Profile`;
   }, [profile]);
 
   return (
@@ -81,7 +82,7 @@ export default function Profile() {
                               <button
                                 className="remove_btn"
                                 onClick={() =>
-                                  addActiveClass(["card_overlay", "card"])
+                                  openRemoverCard("card_overlay", blog._id)
                                 }
                               >
                                 Remove
@@ -112,13 +113,13 @@ const ConfirmRemove = ({ id, setState, username, dispatch }) => {
   return (
     <>
       <Overlay className="card_overlay" />
-      <ConfirmationCard className="card">
+      <ConfirmationCard className="card" id={id}>
         <p>Are You Sure?</p>
         <div className="buttons">
           <button onClick={() => removePost(id, username, setState, dispatch)}>
             Yes
           </button>
-          <button onClick={() => removeActiveClass(["card_overlay", "card"])}>
+          <button onClick={() => closeRemoverCard("card_overlay", id)}>
             No
           </button>
         </div>

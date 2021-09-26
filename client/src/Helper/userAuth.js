@@ -1,7 +1,7 @@
 import { startLoader, stopLoader } from "../Components/loader";
 import { setProfileData } from '../Redux/profile';
 
-export function login(e, type, usernameRef, passwordRef, messageRef) {
+export function login(e, usernameRef, passwordRef, messageRef) {
     e.preventDefault();
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
@@ -13,7 +13,7 @@ export function login(e, type, usernameRef, passwordRef, messageRef) {
     }
 
     startLoader();
-    fetch(`http://localhost:8080/login/${type}`, {
+    fetch('http://localhost:8080/login/local', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export function logout(dispatcher) {
 
 export function checkAuthenticated() {
     startLoader()
-    fetch("http://localhost:8080/getUser", {
+    fetch("http://localhost:8080/userdata", {
         credentials: "include",
     })
         .then((res) => res.json())

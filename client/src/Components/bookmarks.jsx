@@ -10,6 +10,7 @@ export default function Bookmarks() {
 
   useEffect(() => {
     getAndSet("bookmarks", setBlogs);
+    document.title = "Bookmarks";
   }, []);
 
   return (

@@ -12,6 +12,7 @@ export default function BlogPreviewer() {
   useEffect(() => {
     const id = params.id;
     getAndSet(`blog?id=${id}`, setBlogData);
+    document.title = "Reading Blog";
   }, []);
 
   useEffect(() => {

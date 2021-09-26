@@ -14,6 +14,7 @@ export default function Editor() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = "Blog Editor";
     const draftId = params.id;
 
     // Populating draft in fields if draft id is present

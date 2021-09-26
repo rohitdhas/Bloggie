@@ -10,6 +10,7 @@ export default function Login() {
 
   useEffect(() => {
     checkAuthenticated();
+    document.title = "Login";
   }, []);
 
   return (
@@ -26,9 +27,7 @@ export default function Login() {
       <LoginForm className="split right">
         <form
           className="centered"
-          onSubmit={(e) =>
-            login(e, "local", usernameRef, passwordRef, messageRef)
-          }
+          onSubmit={(e) => login(e, usernameRef, passwordRef, messageRef)}
         >
           <p>Login to Bloggie</p>
           <div id="message_card" ref={messageRef}></div>
@@ -43,15 +42,6 @@ export default function Login() {
             />
           </div>
           <button type="submit">Login</button>
-          <button
-            type="button"
-            onClick={(e) =>
-              login(e, "google", usernameRef, passwordRef, messageRef)
-            }
-          >
-            <i className="fab fa-google"></i>
-            <span>Login with Google</span>
-          </button>
           <p>
             Don't have an Account? <a href="/register">Create Here</a>
           </p>

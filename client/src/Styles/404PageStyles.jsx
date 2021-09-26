@@ -5,9 +5,13 @@ export const Page = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 90vh;
 
   h1 {
     color: var(--warning-color);
+  }
+
+  div {
+    text-align: center;
   }
 `;

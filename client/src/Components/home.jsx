@@ -8,6 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     getAndSet("blogs", setBlogs);
+    document.title = "Home";
   }, []);
 
   return (

@@ -15,6 +15,7 @@ export default function Register() {
 
   useEffect(() => {
     checkAuthenticated();
+    document.title = "Create an Account";
   }, []);
 
   function createAccount(e) {

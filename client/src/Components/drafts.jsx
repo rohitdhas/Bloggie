@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAndSet } from "../Helper/blogHandler";
 import { Page } from "../Styles/homeStyles";
 import { removeDraft } from "../Helper/userProfileHandler";
-import { addActiveClass, removeActiveClass } from "../Helper/toggler";
+import { openRemoverCard, closeRemoverCard } from "../Helper/toggler";
 import {
   DraftCard,
   Overlay,
@@ -15,6 +15,7 @@ export default function Drafts() {
 
   useEffect(() => {
     getAndSet("drafts", setDrafts);
+    document.title = "Drafts";
   }, []);
 
   return (
@@ -49,7 +50,7 @@ export function Draft({ blog, setState }) {
         </div>
         <i
           className="fas fa-trash"
-          onClick={() => addActiveClass(["card_overlay", "card"])}
+          onClick={() => openRemoverCard("card_overlay", blog._id)}
         ></i>
       </DraftCard>
       <ConfirmRemove id={blog._id} setState={setState} />
@@ -62,13 +63,13 @@ const ConfirmRemove = ({ id, setState }) => {
   return (
     <>
       <Overlay className="card_overlay" />
-      <ConfirmationCard className="card">
+      <ConfirmationCard className="card" id={id}>
         <p>Are You Sure?</p>
         <div className="buttons">
           <button onClick={() => removeDraft(id, setState, dispatch)}>
             Yes
           </button>
-          <button onClick={() => removeActiveClass(["card_overlay", "card"])}>
+          <button onClick={() => closeRemoverCard("card_overlay", id)}>
             No
           </button>
         </div>
