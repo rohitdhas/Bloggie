@@ -70,3 +70,41 @@ export function checkAuthenticated() {
             }
         });
 }
+
+export function createAccount(e, refs) {
+    e.preventDefault();
+    const { passwordRef, retypePasswordRef, messageRef, usernameRef, emailRef, fullNameRef } = refs;
+
+    const password = passwordRef.current.value;
+    const retypePassword = retypePasswordRef.current.value;
+
+    if (password !== retypePassword) {
+        messageRef.current.innerHTML = "Passwords Don't Match!";
+        messageRef.current.classList.add("active");
+        return;
+    }
+
+    startLoader();
+    fetch("http://localhost:8080/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: fullNameRef.current.value,
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+            email: emailRef.current.value,
+        }),
+        credentials: "include",
+    })
+        .then((res) => res.json())
+        .then(({ message, success }) => {
+            stopLoader();
+            if (success) {
+                window.location = "/login";
+            }
+            messageRef.current.innerHTML = message;
+            messageRef.current.classList.add("active");
+        });
+}

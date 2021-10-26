@@ -3,7 +3,7 @@ import icon from "../Media/blog_icon.png";
 import { LeftSection, Page } from "../Styles/loginPageStyles";
 import { RegisterForm } from "../Styles/registerPageStyles";
 import { checkAuthenticated } from "../Helper/userAuth";
-import { startLoader, stopLoader } from "./loader";
+import { createAccount } from "../Helper/userAuth";
 
 export default function Register() {
   const messageRef = useRef("");
@@ -13,47 +13,19 @@ export default function Register() {
   const emailRef = useRef("");
   const retypePasswordRef = useRef("");
 
+  const refs = {
+    messageRef,
+    fullNameRef,
+    usernameRef,
+    emailRef,
+    passwordRef,
+    retypePasswordRef,
+  };
+
   useEffect(() => {
     checkAuthenticated();
     document.title = "Create an Account";
   }, []);
-
-  function createAccount(e) {
-    e.preventDefault();
-
-    const password = passwordRef.current.value;
-    const retypePassword = retypePasswordRef.current.value;
-
-    if (password !== retypePassword) {
-      messageRef.current.innerHTML = "Passwords Don't Match!";
-      messageRef.current.classList.add("active");
-      return;
-    }
-
-    startLoader();
-    fetch("http://localhost:8080/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: fullNameRef.current.value,
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-        email: emailRef.current.value,
-      }),
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then(({ message, success }) => {
-        stopLoader();
-        if (success) {
-          window.location = "/login";
-        }
-        messageRef.current.innerHTML = message;
-        messageRef.current.classList.add("active");
-      });
-  }
 
   return (
     <Page>
@@ -67,7 +39,7 @@ export default function Register() {
         </div>
       </LeftSection>
       <RegisterForm className="split right">
-        <form className="centered" onSubmit={createAccount}>
+        <form className="centered" onSubmit={(e) => createAccount(e, refs)}>
           <p>Create An Account</p>
           <div id="message_card" ref={messageRef}></div>
           <div>

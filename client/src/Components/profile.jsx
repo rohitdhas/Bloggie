@@ -13,16 +13,19 @@ export default function Profile() {
   const [permession, setPermession] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
-  const profileUsername = params.username;
 
   useEffect(() => {
+    const profileUsername = params.username;
+
     getProfile(profileUsername, setProfile, dispatch);
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   useEffect(() => {
+    const profileUsername = params.username;
+
     setPermession(username === profileUsername);
     document.title = `${profileUsername}'s Profile`;
-  }, [profile]);
+  }, [profile, username]);
 
   return (
     <UserProfile>
@@ -42,9 +45,13 @@ export default function Profile() {
             <h2>Your Blog Posts</h2>
             <PostData>
               {!profile.blogs.length ? (
-                <div className="message">No Blogs Found!</div>
+                <thead>
+                  <tr className="message">
+                    <td>No Blogs Found!</td>
+                  </tr>
+                </thead>
               ) : (
-                <>
+                <tbody>
                   <tr>
                     <th>Title</th>
                     <th>Likes</th>
@@ -99,7 +106,7 @@ export default function Profile() {
                       </tr>
                     );
                   })}
-                </>
+                </tbody>
               )}
             </PostData>
           </div>

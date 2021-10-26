@@ -18,7 +18,7 @@ export default function Home() {
         <div className="page_status">Nothing to show here</div>
       ) : (
         blogs.map((blog) => {
-          return <BlogCard blog={blog} />;
+          return <BlogCard key={blog._id} blog={blog} />;
         })
       )}
     </Page>

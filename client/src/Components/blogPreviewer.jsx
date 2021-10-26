@@ -13,7 +13,7 @@ export default function BlogPreviewer() {
     const id = params.id;
     getAndSet(`blog?id=${id}`, setBlogData);
     document.title = "Reading Blog";
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     const previewer = document.querySelector(".markdown");
@@ -61,11 +61,11 @@ const BlogActionsCard = ({ blogData, setState }) => {
             {blogData.bookmarkedBy.includes(username) ? (
               <li>
                 <i
-                  onClick={() =>
+                  onClick={(e) =>
                     toggleLikesOrBookmarks(
+                      e,
                       "bookmarks",
                       blogData._id,
-                      setState,
                       dispatch
                     )
                   }
@@ -76,11 +76,11 @@ const BlogActionsCard = ({ blogData, setState }) => {
             ) : (
               <li>
                 <i
-                  onClick={() =>
+                  onClick={(e) =>
                     toggleLikesOrBookmarks(
+                      e,
                       "bookmarks",
                       blogData._id,
-                      setState,
                       dispatch
                     )
                   }
@@ -92,13 +92,8 @@ const BlogActionsCard = ({ blogData, setState }) => {
             {blogData.likedBy.includes(username) ? (
               <li>
                 <i
-                  onClick={() =>
-                    toggleLikesOrBookmarks(
-                      "likes",
-                      blogData._id,
-                      setState,
-                      dispatch
-                    )
+                  onClick={(e) =>
+                    toggleLikesOrBookmarks(e, "likes", blogData._id, dispatch)
                   }
                   className="fas fa-heart"
                 ></i>
@@ -107,13 +102,8 @@ const BlogActionsCard = ({ blogData, setState }) => {
             ) : (
               <li>
                 <i
-                  onClick={() =>
-                    toggleLikesOrBookmarks(
-                      "likes",
-                      blogData._id,
-                      setState,
-                      dispatch
-                    )
+                  onClick={(e) =>
+                    toggleLikesOrBookmarks(e, "likes", blogData._id, dispatch)
                   }
                   className="far fa-heart"
                 ></i>

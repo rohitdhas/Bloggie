@@ -1,5 +1,6 @@
 import { startLoader, stopLoader } from "../Components/loader";
 import { notify } from "../Redux/profile";
+import { toggleIcons } from "./toggler";
 
 export function getAndSet(path, setState) {
   startLoader();
@@ -15,20 +16,15 @@ export function getAndSet(path, setState) {
     });
 }
 
-export function toggleLikesOrBookmarks(type, id, setState, dispatcher) {
+export function toggleLikesOrBookmarks(e, type, id, dispatcher) {
+  toggleIcons(e);
+
   fetch(`http://localhost:8080/blog-${type}?id=${id}`, {
     credentials: 'include',
     method: 'PUT'
   }).then(res => res.json())
     .then(({ success, message }) => {
-      if (success) {
-        if (window.location.pathname.includes('bookmarks')) {
-          getAndSet('bookmarks', setState)
-        }
-        else {
-          getAndSet(`blog?id=${id}`, setState);
-        }
-      } else {
+      if (!success) {
         dispatcher(notify({ message, success }))
       }
     })

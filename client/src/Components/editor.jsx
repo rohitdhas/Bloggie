@@ -33,7 +33,7 @@ export default function Editor() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     // Render markup in previewer
@@ -175,7 +175,11 @@ export default function Editor() {
           </div>
           <div id="previewer"></div>
         </EditSection>
-        <a target="_blank" href="https://www.markdownguide.org/basic-syntax/">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.markdownguide.org/basic-syntax/"
+        >
           <i className="far fa-question-circle help_icon"></i>
         </a>
       </Page>

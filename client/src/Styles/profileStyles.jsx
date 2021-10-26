@@ -80,8 +80,11 @@ export const PostData = styled.table`
   width: 100%;
   margin-bottom: 30px;
 
-  .message {
+  thead > .message > td {
     text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: royalblue;
   }
 
   a {

@@ -20,14 +20,14 @@ export default function Bookmarks() {
         <div className="page_status">Nothing to show here</div>
       ) : (
         blogs.map((blog) => {
-          return <BookmarkCard blog={blog} setState={setBlogs} />;
+          return <BookmarkCard key={blog._id} blog={blog} />;
         })
       )}
     </Page>
   );
 }
 
-const BookmarkCard = ({ blog, setState }) => {
+const BookmarkCard = ({ blog }) => {
   const dispatch = useDispatch();
   return (
     <Card>
@@ -52,8 +52,8 @@ const BookmarkCard = ({ blog, setState }) => {
       </div>
       <i
         className="fas fa-bookmark"
-        onClick={() =>
-          toggleLikesOrBookmarks("bookmarks", blog._id, setState, dispatch)
+        onClick={(e) =>
+          toggleLikesOrBookmarks(e, "bookmarks", blog._id, dispatch)
         }
       ></i>
     </Card>

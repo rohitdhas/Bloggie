@@ -19,7 +19,7 @@ export default function SideBar() {
   useEffect(() => {
     updateUserProfile(dispatch);
     toggleListItem(userData.username);
-  }, [location.pathname]);
+  }, [location.pathname, dispatch, userData.username]);
 
   if (!unwantedPaths.includes(location.pathname)) {
     return (
@@ -111,7 +111,7 @@ export function MobileSidebar() {
         return;
       } else li.onclick = closeSidebar;
     });
-  }, [location.pathname]);
+  }, [location.pathname, dispatch, userData.username]);
 
   useEffect(() => {
     if (!userInput) {
@@ -141,7 +141,7 @@ export function MobileSidebar() {
             ? null
             : searchResults.map((result) => {
                 return (
-                  <a href={`/blog/${result._id}`}>
+                  <a key={result._id} href={`/blog/${result._id}`}>
                     <div
                       className="search_result"
                       onClick={() =>
