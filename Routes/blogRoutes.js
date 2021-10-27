@@ -7,19 +7,19 @@ const { getOneBlog,
     createNewBlog } = require('../controllers/blogController');
 
 // Get one Blog
-router.get('/', getOneBlog)
+router.get('/blog', getOneBlog)
 
 // Create a new Blog
-router.post('/', isAuthenticated, createNewBlog)
+router.post('/blog', isAuthenticated, createNewBlog)
 
 // Update a blog
-router.put('/', isAuthenticated, updateBlog)
+router.put('/blog', isAuthenticated, updateBlog)
 
 // Delete a Blog
-router.delete('/', isAuthenticated, deleteBlog)
+router.delete('/blog', isAuthenticated, deleteBlog)
 
 // Get all blogs
-router.get('/', getAllBlogs)
+router.get('/blogs', getAllBlogs)
 
 
 function isAuthenticated(req, res, next) {

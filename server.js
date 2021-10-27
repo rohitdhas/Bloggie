@@ -47,7 +47,7 @@ app.use(passport.session());
 // __________________________ ROUTES __________________________
 
 app.use('/api', userAuthRoutes);
-app.use('/api/blog', blogRoutes);
+app.use('/api', blogRoutes);
 app.use('/api', userProfileRoutes);
 app.use('/api', blogActionRoutes)
 app.use('/api', searchRoutes)
