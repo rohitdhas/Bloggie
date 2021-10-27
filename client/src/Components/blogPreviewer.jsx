@@ -13,7 +13,7 @@ export default function BlogPreviewer() {
     const id = params.id;
     getAndSet(`blog?id=${id}`, setBlogData);
     document.title = "Reading Blog";
-  }, [params]);
+  }, []);
 
   useEffect(() => {
     const previewer = document.querySelector(".markdown");

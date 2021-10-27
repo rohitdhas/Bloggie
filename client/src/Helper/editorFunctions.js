@@ -44,18 +44,18 @@ export const md = new markdownIt().set({
         if (lang && hljs.getLanguage(lang)) {
             try {
                 return (
-                    '<pre className="hljs"><code>' +
+                    '<pre className="hljs">' +
                     hljs.highlight(str, { language: lang, ignoreIllegals: true })
                         .value +
-                    "</code></pre>"
+                    "</pre>"
                 );
             } catch (__) { }
         }
 
         return (
-            '<pre className="hljs"><code>' +
+            '<code className="hljs">' +
             md.utils.escapeHtml(str) +
-            "</code></pre>"
+            "</code>"
         );
     },
 });

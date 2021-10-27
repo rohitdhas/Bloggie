@@ -105,6 +105,7 @@ export function MobileSidebar() {
   useEffect(() => {
     updateUserProfile(dispatch);
     toggleListItem(userData.username);
+
     let liArr = document.querySelectorAll("li");
     liArr.forEach((li) => {
       if (li.querySelector("input")) {

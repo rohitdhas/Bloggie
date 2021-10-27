@@ -30,6 +30,9 @@ export const BlogPost = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
+  line-height: 1.5;
+  font-size: 0.9rem;
+
   section {
     margin: 10px 0;
     width: 60%;
@@ -60,7 +63,7 @@ export const BlogPost = styled.div`
     height: 150px;
     width: 30%;
     img {
-      border-radius: 7px;
+      border-radius: 5px;
       height: 150px;
       width: 100%;
       &::after {
@@ -86,7 +89,7 @@ export const BlogPost = styled.div`
   @media (max-width: 750px) {
     section {
       width: 70%;
-      font-size: 0.8rem;
+      /* font-size: 0.8rem; */
 
       .blog_title {
         font-size: 1.5rem;

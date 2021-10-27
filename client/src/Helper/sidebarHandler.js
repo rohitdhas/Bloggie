@@ -1,5 +1,5 @@
 export default function toggleListItem(username) {
-    const listElements = document.querySelectorAll('li');
+    const listElements = document.querySelectorAll('a > li');
     listElements.forEach(item => {
         item.classList.remove('active');
     })

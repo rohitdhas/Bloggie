@@ -8,7 +8,7 @@
   --warning-color: #ec4f34;
   --warning-light-color: #ee6d57;
   --dark-color: #3a3a3a;
-  --code-background: rgb(184, 221, 255);
+  --code-background: rgb(219, 232, 245);
 }
 
 * {
@@ -23,9 +23,26 @@ body {
 }
 
 pre {
+  font-weight: bold;
   background-color: var(--code-background);
   padding: 10px;
+  font-size: 0.9rem;
   border-radius: 5px;
+  overflow-x: auto;
+  font-family: "Josefin Sans";
+}
+
+pre * {
+  font-family: "Josefin Sans";
+}
+
+code {
+  font-family: "Josefin Sans";
+  font-weight: bold;
+  padding: 5px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  background-color: rgb(229, 230, 252);
 }
 
 @media (max-width: 750px) {

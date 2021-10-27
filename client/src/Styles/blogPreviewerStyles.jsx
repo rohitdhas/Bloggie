@@ -10,6 +10,10 @@ export const Previewer = styled.div`
     margin-top: 30px;
   }
 
+  .markdown {
+    line-height: 2;
+  }
+
   .blog_title {
     font-size: 2.5rem;
     font-weight: 800;
@@ -17,7 +21,8 @@ export const Previewer = styled.div`
   }
   img {
     width: 100%;
-    height: 400px;
+    height: auto;
+    border-radius: 5px;
   }
 
   @media (max-width: 750px) {

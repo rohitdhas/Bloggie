@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Bar = styled.ul`
   background-color: var(--primary-color);
   padding: 10px 0;
-  width: 200px;
+  width: 220px;
   margin: 0;
   position: fixed;
   top: 0;
@@ -132,8 +132,6 @@ export const MobileBar = styled(Bar)`
           padding: 5px 0;
           color: var(--primary-color);
         }
-
-        /* padding: 5px 0; */
       }
     }
   }
