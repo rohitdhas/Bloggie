@@ -68,7 +68,7 @@ export function postBlog(title, snippit, markdown, coverImageUrl, writtenBy, pub
     }
 
     let windowPath, id;
-    let path = 'http://localhost:8080/blog';
+    let path = '/api/blog';
 
     if (window.location.pathname.includes('draft')) {
         windowPath = window.location.pathname.split('/');

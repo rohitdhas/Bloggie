@@ -1,5 +1,5 @@
 export function searchFor(query, setState) {
-    fetch(`http://localhost:8080/search?term=${query}`, {
+    fetch(`/api/search?term=${query}`, {
         credentials: 'include'
     })
         .then(res => res.json())

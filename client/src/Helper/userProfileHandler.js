@@ -4,7 +4,7 @@ import { startLoader, stopLoader } from "../Components/loader";
 import { notify, setProfileData } from '../Redux/profile';
 
 export function removeDraft(id, setState, dispatcher) {
-    fetch(`http://localhost:8080/draft?id=${id}`, {
+    fetch(`/api/draft?id=${id}`, {
         credentials: 'include',
         method: "DELETE",
     })
@@ -21,7 +21,7 @@ export function removeDraft(id, setState, dispatcher) {
 
 export function updateUserProfile(dispatcher) {
     startLoader();
-    fetch(`http://localhost:8080/userdata`, {
+    fetch(`/api/userdata`, {
         credentials: "include",
     })
         .then((res) => res.json())
@@ -36,7 +36,7 @@ export function updateUserProfile(dispatcher) {
 
 export function getProfile(username, setState, dispacher) {
     startLoader();
-    fetch(`http://localhost:8080/profile?username=${username}`, {
+    fetch(`/api/profile?username=${username}`, {
         credentials: 'include'
     }).then(res => res.json())
         .then(({ data, message, success }) => {
@@ -49,7 +49,7 @@ export function getProfile(username, setState, dispacher) {
 
 
 export function removePost(id, username, setState, dispatcher) {
-    fetch(`http://localhost:8080/blog?id=${id}`, {
+    fetch(`/api/blog?id=${id}`, {
         credentials: 'include',
         method: "DELETE",
     })

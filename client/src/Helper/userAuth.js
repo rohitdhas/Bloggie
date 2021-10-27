@@ -13,7 +13,7 @@ export function login(e, usernameRef, passwordRef, messageRef) {
     }
 
     startLoader();
-    fetch('http://localhost:8080/login/local', {
+    fetch('/api/login/local', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export function login(e, usernameRef, passwordRef, messageRef) {
 
 export function logout(dispatcher) {
     startLoader()
-    fetch("http://localhost:8080/logout", {
+    fetch("/api/logout", {
         credentials: "include",
     })
         .then((res) => res.json())
@@ -59,7 +59,7 @@ export function logout(dispatcher) {
 
 export function checkAuthenticated() {
     startLoader()
-    fetch("http://localhost:8080/userdata", {
+    fetch("/api/userdata", {
         credentials: "include",
     })
         .then((res) => res.json())
@@ -85,7 +85,7 @@ export function createAccount(e, refs) {
     }
 
     startLoader();
-    fetch("http://localhost:8080/register", {
+    fetch("/api/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

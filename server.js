@@ -11,6 +11,7 @@ const blogRoutes = require('./Routes/blogRoutes')
 const userProfileRoutes = require('./Routes/userProfileRoutes');
 const blogActionRoutes = require('./Routes/blogActionRoutes');
 const searchRoutes = require('./Routes/searchRoutes');
+const path = require('path');
 const app = express();
 
 require('./passport-configs/localAuth-config');
@@ -21,6 +22,7 @@ require('./Database/DbConnection');
 
 // __________________________ MIDDLEWARES __________________________
 app.use(express.json());
+app.use(express.static("client/build"));
 app.use(express.urlencoded({ extended: true }))
 app.use(
     cors({
@@ -44,11 +46,15 @@ app.use(passport.session());
 
 // __________________________ ROUTES __________________________
 
-app.use(userAuthRoutes);
-app.use(blogRoutes);
-app.use(userProfileRoutes);
-app.use(blogActionRoutes)
-app.use(searchRoutes)
+app.use('/api', userAuthRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api', userProfileRoutes);
+app.use('/api', blogActionRoutes)
+app.use('/api', searchRoutes)
+
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 // ____________________________________________________________
 

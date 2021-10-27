@@ -19,7 +19,7 @@ export default function Editor() {
 
     // Populating draft in fields if draft id is present
     if (draftId) {
-      fetch(`http://localhost:8080/blog?id=${draftId}`, {
+      fetch(`/api/blog?id=${draftId}`, {
         credentials: "include",
       })
         .then((res) => res.json())

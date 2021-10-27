@@ -4,7 +4,7 @@ import { toggleIcons } from "./toggler";
 
 export function getAndSet(path, setState) {
   startLoader();
-  fetch(`http://localhost:8080/${path}`, {
+  fetch(`/api/${path}`, {
     credentials: "include",
   })
     .then((res) => res.json())
@@ -19,7 +19,7 @@ export function getAndSet(path, setState) {
 export function toggleLikesOrBookmarks(e, type, id, dispatcher) {
   toggleIcons(e);
 
-  fetch(`http://localhost:8080/blog-${type}?id=${id}`, {
+  fetch(`/api/blog-${type}?id=${id}`, {
     credentials: 'include',
     method: 'PUT'
   }).then(res => res.json())
