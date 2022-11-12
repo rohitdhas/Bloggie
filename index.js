@@ -65,3 +65,5 @@ app.listen(process.env.PORT || 4040, (err) => {
   if (err) console.log(err.message);
   else console.log(`App is running on Port ${process.env.PORT}!`);
 });
+
+module.exports = app;
