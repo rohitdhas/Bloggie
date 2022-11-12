@@ -13,7 +13,7 @@ export const Page = styled.div`
       padding: 5px;
       font-size: 1.2em;
       outline: none;
-      border: 1px solid grey;
+      border: 2px solid lightgray;
       border-radius: 5px;
       &:hover {
         border: 2px solid grey;
